@@ -1,0 +1,7 @@
+bin/*
+Jar/*
+Train*
+META-INF/*
+.classpath
+.settings/*
+.project
