@@ -1,7 +1,9 @@
 bin/*
 Jar/*
-Train*
 META-INF/*
 .classpath
 .settings/*
 .project
+TrainSave.tex
+TrainTravel
+TrainTravel.jar
