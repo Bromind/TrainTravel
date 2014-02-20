@@ -109,7 +109,7 @@ public class Step {
 	/**
 	 * @return Origin of the step.
 	 */
-	public void Station from(){
+	public Station from(){
 	  return from;
 	}
 
@@ -117,14 +117,14 @@ public class Step {
 	/**
 	 * @return Destination of the step.
 	 */
-	public void Station to(){
+	public Station to(){
 	  return to;
 	}
 
 	/**
 	 * @return Short name of the step ("Origin - Destination").
 	 */
-	public void String shortName(){
+	public String shortName(){
 	  return from + " - " + to;
 	}
 	

@@ -18,15 +18,27 @@ public class Travel {
 
 	private Station from, to;
 
-	
+
+	/**
+	 * @deprecated Use "Travel(false);" instead
+	 */
 	public Travel(){
-		travel = new LinkedList<Step>();
-		System.out.println("\n\n========================\n==== Nouveau Voyage ====\n========================\n\n");
-		System.out.println("Entrez le nombre d'étape du voyage : ");
-		int nStep = scanner.nextInt();
-		for(int i = 0 ; i < nStep ; i++){
-			travel.add(new Step());
-		}
+	  this(false);
+	}
+
+	/**
+	 * @param empty true to construct an empty Travel
+	 */
+	public Travel(boolean empty){
+	  travel = new LinkedList<Step>();
+	  if(!empty){
+	    System.out.println("\n\n========================\n==== Nouveau Voyage ====\n========================\n\n");
+	    System.out.println("Entrez le nombre d'étape du voyage : ");
+	    int nStep = scanner.nextInt();
+	    for(int i = 0 ; i < nStep ; i++){
+	      travel.add(new Step());
+	    }
+	  }
 	}
 	
 	public Travel(Step s){
@@ -132,6 +144,8 @@ public class Travel {
 	 * @return A short name of the travel ("Origin - Destination")
 	 */
 	public String shortName(){
+	  if(travel.isEmpty())
+	    return "Empty Travel";
 	  return from + " - " + to;
 	}
 

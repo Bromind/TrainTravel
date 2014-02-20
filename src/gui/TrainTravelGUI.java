@@ -2,6 +2,10 @@ package gui;
 
 import java.awt.Container;
 import java.awt.GridLayout;
+import java.awt.BorderLayout;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
@@ -9,6 +13,11 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
+import javax.swing.AbstractListModel;
+import javax.swing.ListModel;
+import javax.swing.JList;
+import javax.swing.JButton;
+
 import trainTravel.TrainTravel;
 import travel.Step;
 import travel.Travel;
@@ -24,11 +33,44 @@ class TrainTravelGUI
         JFrame mainFrame = new JFrame("TrainTravel");
         mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        JPanel travelPanel = manageTravelPanel();
+        JPanel displayPanel = manageDisplayPanel();
 
-        mainFrame.getContentPane().add(travelPanel);
+        mainFrame.getContentPane().add(displayPanel);
         mainFrame.pack();
         mainFrame.setVisible(true);
+    }
+
+    private JPanel manageDisplayPanel(){
+      final TravelListModel listModel = new TravelListModel();
+      JList travelNamedList = new JList(listModel);
+      JPanel buttonPanel = new JPanel();
+      JPanel displayPanel = new JPanel(new BorderLayout());
+      
+      JButton addTravel = new JButton("Add Travel");
+      addTravel.addActionListener(
+	  new ActionListener() {
+	    public void actionPerformed(ActionEvent e){
+	      listModel.addTravel();
+	    }
+	  }
+      );
+      
+      JButton removeTravel = new JButton("Remove Travel");
+      addTravel.addActionListener(
+	  new ActionListener() {
+	    public void actionPerformed(ActionEvent e){
+	      listModel.removeTravel(0);
+	    }
+	  }
+      );
+
+      buttonPanel.add(addTravel);
+      buttonPanel.add(removeTravel);
+
+      displayPanel.add(travelNamedList, BorderLayout.CENTER);
+      displayPanel.add(buttonPanel, BorderLayout.SOUTH);
+
+      return displayPanel;
     }
 
     private JPanel manageTravelPanel()
@@ -52,7 +94,7 @@ class TrainTravelGUI
         return panel;
     }
 
-    private java.util.List test()
+    private List<Travel> test()
     {
         Travel travel = TrainTravel.importFile("TrainSave.tex");
         LinkedList linkedlist = new LinkedList();
@@ -60,4 +102,26 @@ class TrainTravelGUI
         return linkedlist;
     }
 
+    private class TravelListModel extends AbstractListModel implements ListModel {
+
+      public int getSize(){
+	return travelList.size();
+      }
+
+      public String getElementAt(int i){
+	// TODO
+	// return travelList.get(i).shortName();
+	return "Travel" + (i + 1);
+      }
+
+      public void addTravel(){
+	travelList.add(new Travel(true));
+	fireIntervalAdded(this, 0, travelList.size() - 1);
+      }
+
+      public void removeTravel(int i){
+	travelList.remove(i);
+	fireIntervalRemoved(this, 0, travelList.size() - 1);
+      }
+    }
 }
