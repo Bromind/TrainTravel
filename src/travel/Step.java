@@ -3,7 +3,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
 
-import TrainTravel.TrainTravel;
+import trainTravel.TrainTravel;
 
 
 public class Step {

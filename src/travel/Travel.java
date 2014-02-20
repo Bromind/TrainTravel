@@ -6,7 +6,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
 
-import TrainTravel.TrainTravel;
+import trainTravel.TrainTravel;
 
 
 
@@ -51,6 +51,10 @@ public class Travel {
 		for(int i = 0 ; i < stepString.size() ; i++){
 			travel.add(new Step(stepString.get(i)));
 		}
+	}
+
+	public Step getStep(int i){
+	  return travel.get(i);
 	}
 	
 	public Travel editTravel(){
@@ -117,6 +121,10 @@ public class Travel {
 		} finally {
 			out.close();
 		}
+	}
+
+	public int stepNumber(){
+	  return travel.size();
 	}
 	
 	public String toString(){

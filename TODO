@@ -1,0 +1,8 @@
+I'm currently working on a swing GUI. 
+
+There will be a JTabbedPane showing the list of travels. Inside it, there will probably be another JTabbedPane for every Steps. Which will show every journey in a GridLayout. 
+otherwise, there may be a scrolling pane with the list of travels, and a JTabbedPane next to it for steps.
+
+I'm am currently working on the Tabbed-ception option. I need to finish the step JTabbedPane.
+
+I'll think about the editing part later.

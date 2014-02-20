@@ -7,7 +7,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
 
-import TrainTravel.TrainTravel;
+import trainTravel.TrainTravel;
 
 public class Journey {
 	private final static Scanner scanner = new Scanner(System.in);
