@@ -8,8 +8,11 @@ import trainTravel.TrainTravel;
 
 public class Step {
 	
-	private List<Journey> step;;
+	private List<Journey> step;
 	Scanner scanner = new Scanner(System.in);
+	
+	private String name = null;
+	private Station from, to;
 
 	
 	public Step(){
@@ -25,16 +28,18 @@ public class Step {
 		for(int i = 0 ; i < nJourney ; i++){
 			step.add(new Journey());
 		}
+		manageFromTo();
 	}
 	
 	public Step(Journey journey){
 		step = new LinkedList<Journey>();
 		step.add(journey);
+		manageFromTo();
 	}
 	
 	public Step(List<Journey> journeyList){
 		step = new LinkedList<Journey>(journeyList);
-		
+		manageFromTo();
 	}
 	
 	public Step(String s){
@@ -47,6 +52,7 @@ public class Step {
 			step.add(new Journey(s.substring(0, s.indexOf("\\hline"))));
 			s = s.substring(s.indexOf("\\hline")+7);
 		}
+		manageFromTo();
 		
 	}
 	
@@ -57,6 +63,7 @@ public class Step {
 	public Step editStep(){
 		int indexToEdit = step.indexOf(TrainTravel.chooseFromList("Quel trajet éditer ?", step));
 		step.set(indexToEdit, step.get(indexToEdit).editJourney());
+		manageFromTo();
 		return new Step(step);
 	}
 	
@@ -91,6 +98,11 @@ public class Step {
 		}
 		sb.append("\\end{tabular}");
 		return sb.toString();
+	}
+
+	private void manageFromTo(){
+	  from = step.get(0).from();
+	  to = step.get(step.size() - 1).to();
 	}
 	
 }
