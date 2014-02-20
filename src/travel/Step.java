@@ -100,9 +100,32 @@ public class Step {
 		return sb.toString();
 	}
 
+
 	private void manageFromTo(){
 	  from = step.get(0).from();
 	  to = step.get(step.size() - 1).to();
+	}
+
+	/**
+	 * @return Origin of the step.
+	 */
+	public void Station from(){
+	  return from;
+	}
+
+
+	/**
+	 * @return Destination of the step.
+	 */
+	public void Station to(){
+	  return to;
+	}
+
+	/**
+	 * @return Short name of the step ("Origin - Destination").
+	 */
+	public void String shortName(){
+	  return from + " - " + to;
 	}
 	
 }

@@ -13,9 +13,10 @@ import trainTravel.TrainTravel;
 public class Travel {
 	
 	private final String OUTPUTFILENAME = "voyage.tex";
-	//private static final String LATEXFILENAME = "voyage.dvi";
 	private final List<Step> travel;
 	Scanner scanner = new Scanner(System.in);
+
+	private Station from, to;
 
 	
 	public Travel(){
@@ -127,6 +128,18 @@ public class Travel {
 	  return travel.size();
 	}
 	
+	/**
+	 * @return A short name of the travel ("Origin - Destination")
+	 */
+	public String shortName(){
+	  return from + " - " + to;
+	}
+
+	private void manageFromTo(){
+	  from = travel.get(0).from();
+	  to = travel.get(travel.size() - 1).to();
+	}
+
 	public String toString(){
 		String sb = new String();
 		sb += "==== Voyage ====\n\n";
