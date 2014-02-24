@@ -33,9 +33,13 @@ class TrainTravelGUI
         JFrame mainFrame = new JFrame("TrainTravel");
         mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        JPanel displayPanel = manageDisplayPanel();
+	mainFrame.setLayout(new BorderLayout());
 
-        mainFrame.getContentPane().add(displayPanel);
+        JPanel displayPanel = manageDisplayPanel();
+	JTabbedPane travelPanel = manageStepPanel(travelList.get(0));
+
+        mainFrame.getContentPane().add(displayPanel, BorderLayout.WEST);
+	mainFrame.getContentPane().add(travelPanel, BorderLayout.CENTER);
         mainFrame.pack();
         mainFrame.setVisible(true);
     }
@@ -84,14 +88,14 @@ class TrainTravelGUI
         return panel;
     }
 
-    private JPanel manageStepPanel(Travel travel)
+    private JTabbedPane manageStepPanel(Travel travel)
     {
         int i = travel.stepNumber();
-        JPanel panel = new JPanel(new GridLayout(i, 1));
+        JTabbedPane pane = new JTabbedPane(TAB_POSITION);
         for(int j = 0; j < i; j++)
-            panel.add(new JLabel(travel.getStep(j).toString()));
+            pane.addTab((j + 1)+"-th step", new JLabel(travel.getStep(j).toString()));
 
-        return panel;
+        return pane;
     }
 
     private List<Travel> test()
