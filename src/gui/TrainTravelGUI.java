@@ -5,6 +5,7 @@ import java.awt.GridLayout;
 import java.awt.BorderLayout;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.Dimension;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -17,6 +18,8 @@ import javax.swing.AbstractListModel;
 import javax.swing.ListModel;
 import javax.swing.JList;
 import javax.swing.JButton;
+import javax.swing.JComponent;
+
 
 import trainTravel.TrainTravel;
 import travel.Step;
@@ -24,7 +27,7 @@ import travel.Travel;
 
 class TrainTravelGUI
 {
-    private final int TAB_POSITION = JTabbedPane.LEFT;
+    private final int TAB_POSITION = JTabbedPane.RIGHT;
     private static final Scanner scanner = new Scanner(System.in);
     private final List<Travel> travelList = test();
 
@@ -40,6 +43,7 @@ class TrainTravelGUI
 
         mainFrame.getContentPane().add(displayPanel, BorderLayout.WEST);
 	mainFrame.getContentPane().add(travelPanel, BorderLayout.CENTER);
+	mainFrame.setPreferredSize(new Dimension(600, 300));
         mainFrame.pack();
         mainFrame.setVisible(true);
     }
@@ -93,9 +97,30 @@ class TrainTravelGUI
         int i = travel.stepNumber();
         JTabbedPane pane = new JTabbedPane(TAB_POSITION);
         for(int j = 0; j < i; j++)
-            pane.addTab((j + 1)+"-th step", new JLabel(travel.getStep(j).toString()));
+            pane.addTab((j + 1)+"-th step", manageJourneyPanel(travel.getStep(j)));
 
         return pane;
+    }
+
+    private JComponent manageJourneyPanel(Step step)
+    {
+      int i = step.journeyNumber();
+      JPanel panel = new JPanel(new GridLayout(i, 1));
+      for(int j = 0 ; j < i ; j++){
+	JButton button = new JButton(step.getJourney(j).toShortString());
+	button.addActionListener(
+	      new ActionListener(){
+		public void actionPerformed(ActionEvent e){
+		  editJourneyFrame();
+		}
+	      });
+	panel.add(button);
+      }
+      return panel;
+    }
+
+    private void editJourneyFrame(){
+      //TODO
     }
 
     private List<Travel> test()

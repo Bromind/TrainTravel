@@ -216,6 +216,12 @@ public class Journey {
 		return sb.toString();
 	}
 
+	public String toShortString(){
+	  StringBuilder sb = new StringBuilder();
+	  sb.append("<html>" + from() + " \u2192 " + to() + " - " + train + "<br>" + departureDate.get(Calendar.DAY_OF_MONTH) + "/" + departureDate.get(Calendar.MONTH) + "/" + departureDate.get(Calendar.YEAR) + " \u2192 " + arrivalDate.get(Calendar.DAY_OF_MONTH) + "/" + arrivalDate.get(Calendar.MONTH) + "/" + arrivalDate.get(Calendar.YEAR) + "</html>");
+	  return sb.toString();
+	}
+
 	public String laTeXArrayLine() {
 
 		StringBuilder sb = new StringBuilder();

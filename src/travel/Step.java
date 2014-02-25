@@ -127,5 +127,16 @@ public class Step {
 	public String shortName(){
 	  return from + " - " + to;
 	}
+
+	/**
+	 * @return Number of journey in the step.
+	 */
+	public int journeyNumber(){
+	  return step.size(); 
+	}
+
+	public Journey getJourney(int i){
+	  return step.get(i);
+	}
 	
 }
