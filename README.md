@@ -10,17 +10,18 @@ How to use ?
 
 1. Compilation
 
-cd /path/to/install/
-git clone https://github.com/Bromind/TrainTravel.git
-cd TrainTravel/
-mkdir bin
-javac -classpath bin/ -sourcepath src -d bin src/TrainTravel/TrainTravel.java
+  cd /path/to/install/
+  git clone https://github.com/Bromind/TrainTravel.git
+  cd TrainTravel/
+  mkdir bin
+  javac -classpath bin/ -sourcepath src -d bin src/TrainTravel/TrainTravel.java
 
 2. Launch
 
 if you have moved :
-cd /path/to/install/TrainTravel/bin/
-java TrainTravel.TrainTravel
+  
+  cd /path/to/install/TrainTravel/bin/
+  java TrainTravel.TrainTravel
 
 3. Arguments
 
@@ -30,4 +31,5 @@ The second argument is the title of the travel, by default empty.
 The third and fourth argument are respectively the family and first author name.
 
 Thus you can replace the last previous command by :
-java TrainTravel.TrainTravel FILENAME TRAVELNAME FAMILYNAME FIRSTNAME
+
+  java TrainTravel.TrainTravel FILENAME TRAVELNAME FAMILYNAME FIRSTNAME
