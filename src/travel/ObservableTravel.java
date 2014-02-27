@@ -2,12 +2,15 @@ package travel;
 
 import java.util.List;
 import travel.Observer;
+import travel.Observable;
+import java.util.LinkedList;
+
 
 /**
  * A wrapper to have an observable Travel.
  * @author Bromind
  */
-public class ObservableTravel extends Observable{
+public class ObservableTravel implements Observable{
   Travel travel;
   List<Observer> observers = new LinkedList<Observer>();
 
@@ -79,19 +82,19 @@ public class ObservableTravel extends Observable{
   /**
    * Edit the travel and update Observers
    */
-  public Travel editTravel(){
+  public ObservableTravel editTravel(){
     travel = travel.editTravel();
     update();
-    return travel;
+    return this;
   }
 
   /**
    * Edit a step
    */
-  public Travel editTravelStep(){
+  public ObservableTravel editTravelStep(){
     travel = travel.editTravelStep();
     update();
-    return travel;
+    return this;
   }
 
   /**
@@ -99,10 +102,10 @@ public class ObservableTravel extends Observable{
    *
    * @param index The step to remove.
    */
-  public Travel removeStep(int index){
+  public ObservableTravel removeStep(int index){
     travel.removeStep(index);
     update();
-    return travel;
+    return this;
   }
 
   /**
@@ -110,10 +113,10 @@ public class ObservableTravel extends Observable{
    *
    * @param s The step to add.
    */
-  public Travel addStep(Step s){
+  public ObservableTravel addStep(Step s){
     travel.addStep(s);
     update();
-    return travel;
+    return this;
   }
 
   /**
@@ -129,7 +132,7 @@ public class ObservableTravel extends Observable{
    * @param fileDir The file name. 
    */
   public void writeLaTeXFile(String fileDir){
-    travel.writeLaTeXFile(String fileDir);
+    travel.writeLaTeXFile(fileDir);
   }
       
   /**
@@ -139,7 +142,7 @@ public class ObservableTravel extends Observable{
    * @param title The file title.
    */
   public void writeLaTeXFile(String fileDir, String title){
-    travel.writeLaTeXFile(String fileDir, String title);
+    travel.writeLaTeXFile(fileDir, title);
   }
 
   /**
@@ -150,7 +153,7 @@ public class ObservableTravel extends Observable{
    * @param authorFamilyName The family name of the author.
    */
   public void writeLaTeXFile(String fileDir, String title, String authorFamilyName){
-	travel.writeLaTeXFile(String fileDir, String title, String authorFamilyName){
+	travel.writeLaTeXFile(fileDir, title, authorFamilyName);
   }
 
   /**
@@ -162,7 +165,7 @@ public class ObservableTravel extends Observable{
    * @param authorFirstName The first name of the author.
    */
   public void writeLaTeXFile(String fileDir, String title, String authorFamilyName, String authorFirstName) {
-	travel.writeLaTeXFile(String fileDir, String title, String authorFamilyName, String authorFirstName);
+	travel.writeLaTeXFile(fileDir, title, authorFamilyName, authorFirstName);
   }
 
   /**
@@ -190,8 +193,8 @@ public class ObservableTravel extends Observable{
    * Call update on each Observer
    */
   private void update(){
-    for(o: observers){
-      o.update();
+    for(int i = 0 ; i < observers.size() ; i++){
+      observers.get(i).update();
     }
   }
 }

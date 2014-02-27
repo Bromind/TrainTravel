@@ -23,16 +23,17 @@ import javax.swing.JComponent;
 
 import trainTravel.TrainTravel;
 import travel.Step;
-import travel.Travel;
+import travel.ObservableTravel;
 
 class TrainTravelGUI
 {
     private final int TAB_POSITION = JTabbedPane.RIGHT;
     private static final Scanner scanner = new Scanner(System.in);
-    private final List<Travel> travelList = test();
+    private final List<ObservableTravel> travelList = new LinkedList<ObservableTravel>();
 
     public void start()
     {
+      travelList.add(TrainTravel.importFile("../TrainSave.tex"));
         JFrame mainFrame = new JFrame("TrainTravel");
         mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -92,7 +93,7 @@ class TrainTravelGUI
         return panel;
     }
 
-    private JTabbedPane manageStepPanel(Travel travel)
+    private JTabbedPane manageStepPanel(ObservableTravel travel)
     {
         int i = travel.stepNumber();
         JTabbedPane pane = new JTabbedPane(TAB_POSITION);
@@ -123,9 +124,9 @@ class TrainTravelGUI
       //TODO
     }
 
-    private List<Travel> test()
+    private List<ObservableTravel> test()
     {
-        Travel travel = TrainTravel.importFile("TrainSave.tex");
+        ObservableTravel travel = TrainTravel.importFile("TrainSave.tex");
         LinkedList linkedlist = new LinkedList();
         linkedlist.add(travel);
         return linkedlist;
@@ -144,7 +145,7 @@ class TrainTravelGUI
       }
 
       public void addTravel(){
-	travelList.add(new Travel(true));
+	travelList.add(new ObservableTravel(true));
 	fireIntervalAdded(this, 0, travelList.size() - 1);
       }
 

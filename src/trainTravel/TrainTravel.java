@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Scanner;
 
 import travel.Travel;
+import travel.ObservableTravel;
 
 public class TrainTravel {
 	private static final int 
@@ -24,7 +25,7 @@ public class TrainTravel {
 			ABOUT = 8;
 	
 	private static final Scanner scanner = new Scanner(System.in);
-	private final static List<Travel> travelList = new LinkedList<Travel>();
+	private final static List<ObservableTravel> travelList = new LinkedList<ObservableTravel>();
 	private static String fileName, title, authorFamilyName, authorFirstName;
 
 	public static void main(String[] args) {
@@ -50,7 +51,7 @@ public class TrainTravel {
 		}
 		
 		System.out.println("               @@@@@@@@\n            @@@@@@@@\n          @@@\n         @@\n        @         _______       _______________________________\n        _         /  ---- \\     /                               \\\n       / \\        [ |   | |     |   ----       ----       ----  |\n       | |  __    [ |   | |     |  |   |      |   |      |   |  |\n     __| |__||___/   ---- |     |  |   |      |   |      |   |  |\n    /                      \\    |   ----       ----       ----  |\n   (~~~~~~~~~~~~~~    __   ==^==|  __                       __  |\n   /\\________________/  \\__/ ^ _|_/  \\_____________________/  \\_|_\n _//__()===()===()===\\__/         \\__/                     \\__/  \n===================================================================");
-		//travelList.add(new Travel(new Step(new Journey(new Station("Geneve"), new Station("Lausanne"), new GregorianCalendar(2013, 1, 1, 7, 0), new GregorianCalendar(2013, 1, 1, 7, 30), new Train(802, TrainKind.IC)))));
+		//travelList.add(new ObservableTravel(new Step(new Journey(new Station("Geneve"), new Station("Lausanne"), new GregorianCalendar(2013, 1, 1, 7, 0), new GregorianCalendar(2013, 1, 1, 7, 30), new Train(802, TrainKind.IC)))));
 		int nextAction = 5;
 		while(nextAction != EXIT){
 			switch (nextAction) {
@@ -80,7 +81,7 @@ public class TrainTravel {
 				nextAction = help();
 				break;
 			case IMPORT_FILE :
-				Travel toAdd = importFile();
+				ObservableTravel toAdd = importFile();
 				if(toAdd != null)
 					travelList.add(toAdd);
 				nextAction = MAIN_MENU;
@@ -107,7 +108,7 @@ public class TrainTravel {
 	}
 	
 	private static int addTravel(){
-		travelList.add(new Travel());
+		travelList.add(new ObservableTravel(false));
 		return MAIN_MENU;
 	}
 	
@@ -145,7 +146,7 @@ public class TrainTravel {
 	
 	private static int mainMenu(){
 		System.out.println("=================\n|| TrainTravel ||\n=================\n\n");
-		for(Travel t : travelList){
+		for(ObservableTravel t : travelList){
 			System.out.println(t);
 		}
 		System.out.println("a. Add a travel");
@@ -209,16 +210,16 @@ public class TrainTravel {
 		return list.get(index);
 	}
 
-	private static Travel importFile(){
+	private static ObservableTravel importFile(){
 		System.out.println("Entrez l'adresse du fichier à ouvrir : ");
 		String fileName = scanner.next();
 		return importFile(fileName);
 	}
 
 	// TODO : change public to private (public for now for tests).
-	public static Travel importFile(String fileName){
+	public static ObservableTravel importFile(String fileName){
 		StringBuilder sb = new StringBuilder();
-		Travel toReturn = null;
+		ObservableTravel toReturn = null;
 
 		try {
 			System.out.println("Import du fichier " + fileName + " en cours...");
@@ -237,7 +238,7 @@ public class TrainTravel {
 			}while(nextInt != -1);
 			in.close();
 			String file = sb.toString();
-			toReturn = new Travel(file);
+			toReturn = new ObservableTravel(file);
 		} catch (FileNotFoundException e) {
 			System.out.println("Le fichier entré n'existe pas.");
 		} catch (IOException e) {
