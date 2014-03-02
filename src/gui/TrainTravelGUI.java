@@ -106,7 +106,7 @@ class TrainTravelGUI
     private JComponent manageJourneyPanel(Step step)
     {
       int i = step.journeyNumber();
-      JPanel panel = new JPanel(new GridLayout(i, 1));
+      JPanel panel = new JPanel(new GridLayout(i, 1, 10, 10));
       for(int j = 0 ; j < i ; j++){
 	JButton button = new JButton(step.getJourney(j).toShortString());
 	button.addActionListener(
